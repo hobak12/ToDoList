@@ -1,69 +1,11 @@
 import "./App.css";
 import React, { useState } from "react";
-
-function TodoList(props) {
-  const { title, body, id } = props.toDo;
-  return (
-    <div className="todo-container">
-      <div>{title}</div>
-      <div>{body}</div>
-      <button
-        onClick={() => {
-          props.deleteHandler(id);
-        }}
-      >
-        삭제
-      </button>
-      <button
-        onClick={() => {
-          props.DoneCancel(id);
-        }}
-      >
-        완료
-      </button>
-    </div>
-  );
-}
-
-function DoneList(props) {
-  const { title, body, id } = props.toDo;
-  return (
-    <div className="todo-container">
-      <div>{title}</div>
-      <div>{body}</div>
-      <button
-        onClick={() => {
-          props.deleteHandler(id);
-        }}
-      >
-        삭제
-      </button>
-      <button
-        onClick={() => {
-          props.DoneCancel(id);
-        }}
-      >
-        취소
-      </button>
-    </div>
-  );
-}
+import { DoneList, TodoList } from "./components/DoDoneList";
+import CustomButton from "./components/CustomButtom";
 
 function App() {
   const [toDoList, setToDoList] = useState([
-    {
-      id: 1,
-      title: "리액트 공부하기",
-      body: "리액트 기초를 공부해봅시다.",
-      isDone: false,
-    },
-
-    {
-      id: 2,
-      title: "리액트 공부하기",
-      body: "리액트 기초를 공부해봅시다.",
-      isDone: true,
-    },
+    { id: 0, title: "", body: "", isDone: false },
   ]);
 
   const [title, setTitle] = useState("");
@@ -115,7 +57,9 @@ function App() {
               type="text"
             />
           </div>
-          <button onClick={addToDoHandler}>추가하기</button>
+          <CustomButton color="rgb(182, 255, 186)" onClick={addToDoHandler}>
+            추가하기
+          </CustomButton>
         </div>
 
         <h2>Working..🔥</h2>
