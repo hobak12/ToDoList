@@ -12,8 +12,8 @@ function App() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
-  //todolist 추가 함수
-  const addToDoHandler = () => {
+  //todo 추가 함수
+  const addToDo = () => {
     if (body !== "" && title !== "") {
       //빈 값일 때 alert 뜨도록 조건을 추가
       const newToDoList = {
@@ -30,8 +30,8 @@ function App() {
     }
   };
 
-  //todolist 삭제 함수
-  const deleteTodoList = (id) => {
+  //todo 삭제 함수
+  const deleteToDo = (id) => {
     const newToDoList = toDoList.filter((toDo) => toDo.id !== id);
     setToDoList(newToDoList);
   };
@@ -52,8 +52,29 @@ function App() {
         body={body}
         setTitle={setTitle}
         setBody={setBody}
-        addToDoHandler={addToDoHandler}
+        addToDo={addToDo}
       />
+      <div className="add-form">
+        <div className="input-group">
+          <label htmlFor="title">제목</label>
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            id="title"
+            type="text"
+          />
+          <label htmlFor="context">내용</label>
+          <input
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            id="context"
+            type="text"
+          />
+        </div>
+        <button className="add-btn" onClick={addToDo}>
+          추가
+        </button>
+      </div>
 
       {/* 초기값으로 넣어놓은 0번째 배열을 빼고 map 해준다 */}
       <h2>Working...💚</h2>
@@ -62,7 +83,7 @@ function App() {
           return (
             <TodoList
               DoneCancel={DoneCancel}
-              deleteHandler={deleteTodoList}
+              deleteToDo={deleteToDo}
               toDo={toDo}
               key={toDo.id}
             />
@@ -77,7 +98,7 @@ function App() {
           return (
             <TodoList
               DoneCancel={DoneCancel}
-              deleteHandler={deleteTodoList}
+              deleteToDo={deleteToDo}
               toDo={toDo}
               key={toDo.id}
             />

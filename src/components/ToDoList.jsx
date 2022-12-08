@@ -10,7 +10,7 @@ export function TodoList(props) {
         <button
           className="delete-btn"
           onClick={() => {
-            props.deleteHandler(id);
+            props.deleteToDo(id);
           }}
         >
           삭제
