@@ -13,8 +13,9 @@ function App() {
   const [body, setBody] = useState("");
 
   //todo 추가 함수
-  const addToDo = () => {
-    if (body !== "" && title !== "") {
+  const addToDo = (event) => {
+    event.preventDefault();
+    if (body && title) {
       //빈 값일 때 alert 뜨도록 조건을 추가
       const newToDoList = {
         id: toDoList.length + 1,
@@ -26,7 +27,7 @@ function App() {
       setTitle(""); //작성 후 인풋 초기화
       setBody("");
     } else {
-      alert("제목과 내용을 입력해주세요");
+      alert("제목과 내용을 둘 다 입력해주세요");
     }
   };
 
@@ -44,38 +45,24 @@ function App() {
     setToDoList(newToDoList);
   };
 
+  const onChangeTitleHandler = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const onChangeBodyHandler = (e) => {
+    setBody(e.target.value);
+  };
+
   return (
     <div className="layout">
       <Header />
       <InputBox
         title={title}
         body={body}
-        setTitle={setTitle}
-        setBody={setBody}
+        onChangeTitleHandler={onChangeTitleHandler}
+        onChangeBodyHandler={onChangeBodyHandler}
         addToDo={addToDo}
       />
-      <div className="add-form">
-        <div className="input-group">
-          <label htmlFor="title">제목</label>
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            id="title"
-            type="text"
-          />
-          <label htmlFor="context">내용</label>
-          <input
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            id="context"
-            type="text"
-          />
-        </div>
-        <button className="add-btn" onClick={addToDo}>
-          추가
-        </button>
-      </div>
-
       {/* 초기값으로 넣어놓은 0번째 배열을 빼고 map 해준다 */}
       <h2>Working...💚</h2>
       {toDoList.map((toDo) => {
