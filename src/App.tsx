@@ -1,19 +1,18 @@
 import "./App.css";
-import React, { useState } from "react";
-import { TodoList } from "./components/ToDoList";
+import React, { FC, useState, FormEvent, ChangeEvent } from "react";
+import TodoList from "./components/ToDoList";
 import Header from "./components/Header";
 import InputBox from "./components/InputBox";
+import { Itodo } from "./interfaces";
 
-function App() {
-  const [toDoList, setToDoList] = useState([
-    { id: 0, title: "", body: "", isDone: false },
-  ]);
+const App: FC = () => {
+  const [toDoList, setToDoList] = useState<Itodo[]>([]);
 
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [body, setBody] = useState<string>("");
 
   //todo 추가 함수
-  const addToDo = (event) => {
+  const addToDo = (event: FormEvent): void => {
     event.preventDefault();
     if (body && title) {
       //빈 값일 때 alert 뜨도록 조건을 추가
@@ -23,7 +22,7 @@ function App() {
         body: body,
         isDone: false,
       };
-      setToDoList([...toDoList, newToDoList]);
+      setToDoList((prev) => [...prev, newToDoList]);
       setTitle(""); //작성 후 인풋 초기화
       setBody("");
     } else {
@@ -32,24 +31,24 @@ function App() {
   };
 
   //todo 삭제 함수
-  const deleteToDo = (id) => {
+  const deleteToDo = (id: number): void => {
     const newToDoList = toDoList.filter((toDo) => toDo.id !== id);
     setToDoList(newToDoList);
   };
 
   //완료, 취소 변경 함수
-  const DoneCancel = (id) => {
+  const DoneCancel = (id: number): void => {
     const newToDoList = toDoList.map((toDo) =>
       toDo.id === id ? { ...toDo, isDone: !toDo.isDone } : toDo
     );
     setToDoList(newToDoList);
   };
 
-  const onChangeTitleHandler = (e) => {
+  const onChangeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
-  const onChangeBodyHandler = (e) => {
+  const onChangeBodyHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setBody(e.target.value);
   };
 
@@ -65,7 +64,7 @@ function App() {
       />
       {/* 초기값으로 넣어놓은 0번째 배열을 빼고 map 해준다 */}
       <h2>Working...💚</h2>
-      {toDoList.map((toDo) => {
+      {toDoList.map((toDo: Itodo) => {
         if (toDo.isDone === false && toDo.id !== 0) {
           return (
             <TodoList
@@ -96,6 +95,6 @@ function App() {
       })}
     </div>
   );
-}
+};
 
 export default App;

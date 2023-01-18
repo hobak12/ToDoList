@@ -1,10 +1,20 @@
+import { ChangeEvent, FormEvent } from "react";
+
+interface Props {
+  title: string;
+  body: string;
+  onChangeTitleHandler(e: ChangeEvent<HTMLInputElement>): void;
+  onChangeBodyHandler(e: ChangeEvent<HTMLInputElement>): void;
+  addToDo(event: FormEvent): void;
+}
+
 const InputBox = ({
   title,
   body,
   onChangeTitleHandler,
   onChangeBodyHandler,
   addToDo,
-}) => {
+}: Props) => {
   return (
     <form onSubmit={addToDo} className="add-form">
       <div className="input-group">

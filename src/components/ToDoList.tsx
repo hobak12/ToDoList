@@ -1,5 +1,13 @@
-export function TodoList(props) {
-  const { title, body, id, isDone } = props.toDo;
+import { Itodo } from "../interfaces";
+
+interface Props {
+  toDo: Itodo;
+  DoneCancel(id: number): void;
+  deleteToDo(id: number): void;
+}
+
+const TodoList = ({ toDo, DoneCancel, deleteToDo }: Props) => {
+  const { title, body, id, isDone } = toDo;
   return (
     <>
       <div className="list-wrapper">
@@ -9,14 +17,14 @@ export function TodoList(props) {
           <button
             className="delete-btn"
             onClick={() => {
-              props.deleteToDo(id);
+              deleteToDo(id);
             }}
           >
             삭제
           </button>
           <button
             onClick={() => {
-              props.DoneCancel(id);
+              DoneCancel(id);
             }}
             className="done-btn"
           >
@@ -26,4 +34,6 @@ export function TodoList(props) {
       </div>
     </>
   );
-}
+};
+
+export default TodoList;
