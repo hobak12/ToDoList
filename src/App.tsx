@@ -3,7 +3,6 @@ import React, { FC, useState, FormEvent, ChangeEvent } from "react";
 import TodoList from "./components/ToDoList";
 import Header from "./components/Header";
 import InputBox from "./components/InputBox";
-import { Itodo } from "./interfaces";
 
 const App: FC = () => {
   const [toDoList, setToDoList] = useState<Itodo[]>([]);
@@ -12,7 +11,7 @@ const App: FC = () => {
   const [body, setBody] = useState<string>("");
 
   //todo 추가 함수
-  const addToDo = (event: FormEvent): void => {
+  const addToDo = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     if (body && title) {
       //빈 값일 때 alert 뜨도록 조건을 추가
@@ -64,7 +63,7 @@ const App: FC = () => {
       />
       {/* 초기값으로 넣어놓은 0번째 배열을 빼고 map 해준다 */}
       <h2>Working...💚</h2>
-      {toDoList.map((toDo: Itodo) => {
+      {toDoList.map((toDo) => {
         if (toDo.isDone === false && toDo.id !== 0) {
           return (
             <TodoList

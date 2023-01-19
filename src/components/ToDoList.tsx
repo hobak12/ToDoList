@@ -1,12 +1,10 @@
-import { Itodo } from "../interfaces";
+import { FC } from "react";
 
-interface Props {
+const TodoList: FC<{
   toDo: Itodo;
   DoneCancel(id: number): void;
   deleteToDo(id: number): void;
-}
-
-const TodoList = ({ toDo, DoneCancel, deleteToDo }: Props) => {
+}> = ({ toDo, DoneCancel, deleteToDo }) => {
   const { title, body, id, isDone } = toDo;
   return (
     <>
